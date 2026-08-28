@@ -4,7 +4,7 @@ This repository is the public reproducibility artifact for:
 
 > **CARE-DS: Critical-Neighborhood-Aware Residual-Energy Dominating-Set
 > Scheduling for Heterogeneous Wireless Sensor Networks**
->
+> 
 > Lijo M. Jose and Deepu Benson
 
 CARE-DS schedules a new dominating set—or a sink-rooted connected dominating
@@ -28,15 +28,15 @@ The evidence supports a conditional conclusion, not universal dominance:
 
 ## What is included
 
-| Path | Contents |
-|---|---|
+| Path           | Contents                                                                   |
+| -------------- | -------------------------------------------------------------------------- |
 | `src/wsnlife/` | Graph generation, energy models, schedulers, baselines, and exact routines |
-| `configs/` | Fixed configurations and deterministic seeds for every reported study |
-| `results/` | Final validated raw matrices and derived statistical tables |
-| `scripts/` | Experiment, validation, analysis, and figure-generation entry points |
-| `tests/` | Feasibility, energy-accounting, failure, and exactness checks |
-| `paper/` | Pre-submission manuscript PDF and generated figures |
-| `docs/` | Reproduction protocol, data dictionary, baseline audit, and disclosure |
+| `configs/`     | Fixed configurations and deterministic seeds for every reported study      |
+| `results/`     | Final validated raw matrices and derived statistical tables                |
+| `scripts/`     | Experiment, validation, analysis, and figure-generation entry points       |
+| `tests/`       | Feasibility, energy-accounting, failure, and exactness checks              |
+| `paper/`       | Pre-submission manuscript PDF and generated figures                        |
+| `docs/`        | Reproduction protocol, data dictionary, baseline audit, and disclosure     |
 
 The public release intentionally excludes superseded runs, interrupted logs,
 reviewer-response notes, internal decision reports, legacy MATLAB experiments,
@@ -44,15 +44,15 @@ local working archives, and copies of third-party papers.
 
 ## Evidence matrix
 
-| Study | Instances | Rows | Main purpose |
-|---|---:|---:|---|
-| Primary dynamic | 2,700 | 86,400 | Five topology families, 30 seeds, 50–500 nodes, three densities, four handover costs, two service models |
-| Weighted static | 3,150 | 18,900 | Modern static baselines up to 1,000 nodes |
-| Unweighted static | 1,890 | 9,450 | FSS-oriented validation under equal 0.5 s budgets |
-| First-order radio | 450 | 9,000 | Transmission, reception, aggregation, and wake-up energy |
-| Controlled failures | 450 | 12,150 | No failure, random failure, and low-reserve-node failure |
-| Ablation | 450 | 8,100 | Reserve and switch-awareness components |
-| Exact challenge | 12 | 48 | Fixed adversarial 22-node ordinary-domination cases |
+| Study               | Instances | Rows   | Main purpose                                                                                             |
+| ------------------- | ---------:| ------:| -------------------------------------------------------------------------------------------------------- |
+| Primary dynamic     | 2,700     | 86,400 | Five topology families, 30 seeds, 50–500 nodes, three densities, four handover costs, two service models |
+| Weighted static     | 3,150     | 18,900 | Modern static baselines up to 1,000 nodes                                                                |
+| Unweighted static   | 1,890     | 9,450  | FSS-oriented validation under equal 0.5 s budgets                                                        |
+| First-order radio   | 450       | 9,000  | Transmission, reception, aggregation, and wake-up energy                                                 |
+| Controlled failures | 450       | 12,150 | No failure, random failure, and low-reserve-node failure                                                 |
+| Ablation            | 450       | 8,100  | Reserve and switch-awareness components                                                                  |
+| Exact challenge     | 12        | 48     | Fixed adversarial 22-node ordinary-domination cases                                                      |
 
 All principal raw matrices use paired deterministic instances. Every scheduled
 set is checked for domination and, in connected mode, sink-rooted connectivity.
@@ -117,21 +117,6 @@ AI-assistance disclosure is preserved in
 
 Until a DOI is assigned, cite this repository using [`CITATION.cff`](CITATION.cff)
 and identify the release version or commit hash used.
-
-## Upload as a repository
-
-The extracted directory can be committed directly:
-
-```bash
-git init -b main
-git add .
-git commit -m "Initial public CARE-DS reproducibility release"
-git remote add origin <public-repository-url>
-git push -u origin main
-```
-
-The suggested repository name is `care-ds-wsn-lifetime`. Review the manuscript
-status and add the final DOI/repository URL to `CITATION.cff` after publication.
 
 ## License
 
