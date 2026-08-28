@@ -1,0 +1,85 @@
+[
+  {
+    "study": "unit",
+    "result": "results/submission_event_raw.csv",
+    "rows": 86400,
+    "expected_rows": 86400,
+    "instances": 2700,
+    "expected_instances": 2700,
+    "duplicate_rows": 0,
+    "invalid_rows": 0,
+    "missing_values": 0,
+    "passed": true
+  },
+  {
+    "study": "modern_static",
+    "result": "results/modern_static_raw.csv",
+    "rows": 18900,
+    "expected_rows": 18900,
+    "instances": 3150,
+    "expected_instances": 3150,
+    "duplicate_rows": 0,
+    "invalid_rows": 0,
+    "missing_values": 0,
+    "passed": true
+  },
+  {
+    "study": "modern_unweighted",
+    "result": "results/modern_unweighted_raw.csv",
+    "rows": 9450,
+    "expected_rows": 9450,
+    "instances": 1890,
+    "expected_instances": 1890,
+    "duplicate_rows": 0,
+    "invalid_rows": 0,
+    "missing_values": 0,
+    "passed": true
+  },
+  {
+    "study": "radio",
+    "result": "results/radio_raw.csv",
+    "rows": 9000,
+    "expected_rows": 9000,
+    "instances": 450,
+    "expected_instances": 450,
+    "duplicate_rows": 0,
+    "invalid_rows": 0,
+    "missing_values": 0,
+    "passed": true
+  },
+  {
+    "study": "failures",
+    "result": "results/failures_raw.csv",
+    "rows": 12150,
+    "expected_rows": 12150,
+    "instances": 450,
+    "expected_instances": 450,
+    "duplicate_rows": 0,
+    "invalid_rows": 0,
+    "missing_values": 0,
+    "passed": true
+  },
+  {
+    "study": "ablation",
+    "result": "results/ablation_submission_raw.csv",
+    "rows": 8100,
+    "expected_rows": 8100,
+    "instances": 450,
+    "expected_instances": 450,
+    "duplicate_rows": 0,
+    "invalid_rows": 0,
+    "missing_values": 0,
+    "passed": true
+  },
+  {
+    "study": "lower_tail_analysis",
+    "result": "results/lower_tail_summary.csv; results/lower_tail_deciles.csv",
+    "summary_rows": 12,
+    "decile_rows": 40,
+    "duplicate_summary_rows": 0,
+    "duplicate_decile_rows": 0,
+    "expected_pair_counts": true,
+    "finite_core_statistics": true,
+    "passed": true
+  }
+]

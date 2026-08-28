@@ -1,0 +1,25 @@
+{
+  "master_seed": 7,
+  "runs": 1,
+  "node_sizes": [30],
+  "target_degrees": [8],
+  "topologies": ["rgg", "barabasi_albert"],
+  "energy_low": 3,
+  "energy_high": 8,
+  "active_cost": 1.0,
+  "switch_costs": [0.0, 0.25],
+  "modes": ["dominating", "connected"],
+  "failure_scenarios": ["none"],
+  "energy_model": "unit",
+  "random_starts": 3,
+  "refresh_interval": 3,
+  "static_time_budget_s": 0.03,
+  "static_time_budget_cap_s": 0.03,
+  "max_rounds": 100,
+  "workers": 2,
+  "algorithms": [
+    "EAA-static", "GH-MWDDS+", "PBIG-R", "MC-CMSA-R", "FSS-2026-R",
+    "EAAS-S4C-MAB-R", "D-EAA", "DWG", "MS-RG", "D-EAA-TM", "DWG-TM",
+    "MS-RG-TM", "CARE-DS"
+  ]
+}

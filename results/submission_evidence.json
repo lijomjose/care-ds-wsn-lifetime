@@ -1,0 +1,37 @@
+{
+  "studies_loaded": [
+    "unit",
+    "radio",
+    "failures",
+    "ablation"
+  ],
+  "all_schedules_valid": true,
+  "care_positive_vs_best_cells": 12,
+  "care_nonpositive_vs_best_cells": 6,
+  "care_significant_positive_cells": 12,
+  "modern_static": {
+    "complete_instances": 3150,
+    "algorithms": [
+      "EAA-static",
+      "EAAS-S4C-MAB-R",
+      "FSS-2026-R",
+      "GH-MWDDS+",
+      "MC-CMSA-R",
+      "PBIG-R"
+    ],
+    "friedman_p": 0.0,
+    "best_mean_rank": "EAA-static"
+  },
+  "modern_unweighted": {
+    "complete_instances": 1890,
+    "algorithms": [
+      "EAA-static",
+      "FSS-2026-R",
+      "GH-MWDDS+",
+      "MC-CMSA-R",
+      "PBIG-R"
+    ],
+    "friedman_p": 0.0,
+    "best_mean_rank": "FSS-2026-R"
+  }
+}

@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite it and the associated article."
+title: "CARE-DS: Dynamic Dominating-Set Scheduling for Heterogeneous Wireless Sensor Networks"
+type: software
+version: 0.1.0
+date-released: 2026-08-28
+authors:
+  - family-names: Jose
+    given-names: Lijo M.
+  - family-names: Benson
+    given-names: Deepu
+keywords:
+  - wireless sensor networks
+  - dominating sets
+  - connected dominating sets
+  - residual energy
+  - network lifetime
+license: MIT

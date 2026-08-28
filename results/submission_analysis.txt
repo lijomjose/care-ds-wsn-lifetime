@@ -1,0 +1,96 @@
+SUBMISSION STUDY ANALYSIS
+
+{
+  "studies_loaded": [
+    "unit",
+    "radio",
+    "failures",
+    "ablation"
+  ],
+  "all_schedules_valid": true,
+  "care_positive_vs_best_cells": 12,
+  "care_nonpositive_vs_best_cells": 6,
+  "care_significant_positive_cells": 12,
+  "modern_static": {
+    "complete_instances": 3150,
+    "algorithms": [
+      "EAA-static",
+      "EAAS-S4C-MAB-R",
+      "FSS-2026-R",
+      "GH-MWDDS+",
+      "MC-CMSA-R",
+      "PBIG-R"
+    ],
+    "friedman_p": 0.0,
+    "best_mean_rank": "EAA-static"
+  },
+  "modern_unweighted": {
+    "complete_instances": 1890,
+    "algorithms": [
+      "EAA-static",
+      "FSS-2026-R",
+      "GH-MWDDS+",
+      "MC-CMSA-R",
+      "PBIG-R"
+    ],
+    "friedman_p": 0.0,
+    "best_mean_rank": "FSS-2026-R"
+  }
+}
+
+BEST-COMPETITOR TESTS
+   study  pairs   care_mean  best_competitor_mean  relative_improvement_pct  mean_instance_improvement_pct  mean_difference   ci95_low  ci95_high  wins  ties  losses  rank_biserial         p_raw       mode  switch_cost failure_scenario energy_model        p_holm
+    unit   2700  518.304444            556.723704                 -6.900956                      -5.559752       -38.419259 -39.859713 -36.951833    72   714    1914      -0.986037  0.000000e+00  connected       0.0000             none         unit  0.000000e+00
+    unit   2700  501.039259            512.077778                 -2.155633                      -1.863522       -11.038519 -11.941926 -10.145176   638   544    1518      -0.573964 6.292279e-118  connected       0.1000             none         unit 1.887684e-117
+    unit   2700  495.308519            479.581481                  3.279325                       2.221819        15.727037  14.565157  16.840759  1577   542     581       0.611204 1.420418e-133  connected       0.2500             none         unit 5.681670e-133
+    unit   2700  486.611852            470.261481                  3.476868                       2.398743        16.350370  15.095694  17.615620  1582   483     635       0.560160 1.556584e-115  connected       0.5000             none         unit 3.113169e-115
+    unit   2700  562.433704            596.661111                 -5.736490                      -4.367124       -34.227407 -35.799204 -32.730361   118  1033    1549      -0.973542 9.324729e-260 dominating       0.0000             none         unit 6.527310e-259
+    unit   2700  543.547037            552.309259                 -1.586470                      -1.135681        -8.762222  -9.677426  -7.852750   843   638    1219      -0.442703  5.028631e-68 dominating       0.1000             none         unit  5.028631e-68
+    unit   2700  537.181481            522.134444                  2.881832                       2.293172        15.047037  14.168463  15.959398  1719   630     351       0.751148 6.983449e-193 dominating       0.2500             none         unit 4.190069e-192
+    unit   2700  528.985185            514.520370                  2.811320                       2.189899        14.464815  13.499954  15.467806  1807   434     459       0.648938 6.602679e-158 dominating       0.5000             none         unit 3.301340e-157
+   radio    450 1144.980000           1184.097778                 -3.303594                      -2.809563       -39.117778 -46.809056 -31.563667   125    16     309      -0.581376  9.078893e-26  connected       0.0000             none        radio  3.631557e-25
+   radio    450 1126.531111           1108.873333                  1.592407                       1.225966        17.657778   9.830222  25.887000   236    13     201       0.155941  4.730651e-03  connected       0.0001             none        radio  4.730651e-03
+   radio    450  237.455556            249.975556                 -5.008490                      -3.960463       -12.520000 -19.242278  -5.917667   169    10     271      -0.253504  4.066329e-06 dominating       0.0000             none        radio  1.219899e-05
+   radio    450  235.824444            223.864444                  5.342519                      12.785834        11.960000   4.857444  18.983056   261    14     175       0.205047  2.070808e-04 dominating       0.0001             none        radio  4.141617e-04
+failures    450  443.064444            428.533333                  3.390894                       2.235264        14.531111  12.068833  17.013444   252   100      98       0.639674  3.294463e-25  connected       0.2500             none         unit  1.317785e-24
+failures    450  425.273333            411.791111                  3.274044                       2.032551        13.482222  11.117444  16.060167   230   125      95       0.609533  1.662293e-21  connected       0.2500           random         unit  1.665450e-21
+failures    450  491.008889            476.995556                  2.937833                       2.105709        14.013333  11.440000  16.502389   281    51     118       0.562870  1.961193e-22  connected       0.2500         targeted         unit  5.883579e-22
+failures    450  503.668889            490.053333                  2.778382                       2.174478        13.615556  11.626333  15.751722   282   108      60       0.742196  1.112628e-32 dominating       0.2500             none         unit  6.675770e-32
+failures    450  486.637778            475.306667                  2.383958                       1.589029        11.331111   9.426500  13.308944   239   149      62       0.701965  4.667678e-26 dominating       0.2500           random         unit  2.333839e-25
+failures    450  571.208889            559.271111                  2.134524                       1.707900        11.937778   9.697667  14.320111   264    81     105       0.576357  8.327248e-22 dominating       0.2500         targeted         unit  1.665450e-21
+
+EXACT SUMMARY
+      mode algorithm  instances  exact_hits  mean_ratio  min_ratio
+dominating   CARE-DS         12           5    0.964289   0.884615
+dominating  D-EAA-ER         12           5    0.932653   0.833333
+dominating       DWG         12           3    0.925858   0.840000
+dominating  MS-RG-WT         12           3    0.925634   0.833333
+
+MODERN STATIC EVIDENCE
+{
+  "complete_instances": 3150,
+  "algorithms": [
+    "EAA-static",
+    "EAAS-S4C-MAB-R",
+    "FSS-2026-R",
+    "GH-MWDDS+",
+    "MC-CMSA-R",
+    "PBIG-R"
+  ],
+  "friedman_p": 0.0,
+  "best_mean_rank": "EAA-static"
+}
+
+MODERN UNWEIGHTED EVIDENCE
+{
+  "complete_instances": 1890,
+  "algorithms": [
+    "EAA-static",
+    "FSS-2026-R",
+    "GH-MWDDS+",
+    "MC-CMSA-R",
+    "PBIG-R"
+  ],
+  "friedman_p": 0.0,
+  "best_mean_rank": "FSS-2026-R"
+}

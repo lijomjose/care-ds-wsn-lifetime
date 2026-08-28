@@ -1,0 +1,21 @@
+{
+  "master_seed": 20260818,
+  "runs": 30,
+  "node_sizes": [50, 100, 150, 200, 250, 500],
+  "target_degrees": [15, 25, 35],
+  "topologies": ["rgg", "clustered", "er", "watts_strogatz", "barabasi_albert"],
+  "energy_low": 20,
+  "energy_high": 100,
+  "active_cost": 1.0,
+  "switch_costs": [0.0, 0.1, 0.25, 0.5],
+  "modes": ["dominating", "connected"],
+  "failure_scenarios": ["none"],
+  "energy_model": "unit",
+  "random_starts": 4,
+  "refresh_interval": 100,
+  "static_time_budget_s": 0.05,
+  "static_time_budget_cap_s": 0.05,
+  "max_rounds": 20000,
+  "workers": 8,
+  "algorithms": ["D-EAA-ER", "DWG", "MS-RG-WT", "CARE-DS"]
+}

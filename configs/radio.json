@@ -1,0 +1,33 @@
+{
+  "master_seed": 20260819,
+  "runs": 10,
+  "node_sizes": [100, 250, 500],
+  "target_degrees": [15, 25, 35],
+  "topologies": ["rgg", "clustered", "er", "watts_strogatz", "barabasi_albert"],
+  "energy_low": 0.05,
+  "energy_high": 0.20,
+  "active_cost": 0.0,
+  "switch_costs": [0.0, 0.0001],
+  "modes": ["dominating", "connected"],
+  "failure_scenarios": ["none"],
+  "energy_model": "radio",
+  "radio_parameters": {
+    "packet_bits": 4000,
+    "electronics_j_per_bit": 5e-8,
+    "amplifier_j_per_bit_m2": 1e-10,
+    "aggregation_j_per_bit": 5e-9,
+    "field_side_m": 100.0,
+    "sink_xy_m": [50.0, 110.0]
+  },
+  "random_starts": 4,
+  "refresh_interval": 100,
+  "static_time_budget_s": 0.5,
+  "static_time_budget_per_node_s": 0.0,
+  "static_time_budget_cap_s": 0.5,
+  "max_rounds": 5000,
+  "workers": 8,
+  "algorithms": [
+    "EAA-static", "PBIG-R", "FSS-2026-R", "EAAS-S4C-MAB-R",
+    "D-EAA-ER", "DWG", "MS-RG-WT", "CARE-DS"
+  ]
+}
