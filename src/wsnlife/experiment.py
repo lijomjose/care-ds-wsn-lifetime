@@ -76,7 +76,10 @@ def _run_instance(task):
             tuple(config.get("failure_rounds", [25, 50])),
         )
         # Equal-search algorithms share their stochastic candidate stream.
-        if algorithm in {"CARE-DS", "DWG-TM", "D-EAA-TM", "D-EAA-ER", "MS-RG-TM", "MS-RG-WT", "CARE-noreserve", "CARE-noswitch"}:
+        if algorithm in {
+            "CARE-DS", "DWG-TM", "D-EAA-TM", "D-EAA-ER", "MS-RG-TM",
+            "MS-RG-WT", "MS-RG-WT-DW", "CARE-noreserve", "CARE-noswitch",
+        }:
             algorithm_seed = derived_seed(instance_seed, mode, switch_cost, scenario, "equal-portfolio")
         else:
             algorithm_seed = derived_seed(instance_seed, mode, switch_cost, scenario, algorithm)
@@ -102,6 +105,7 @@ def _run_instance(task):
             refresh_interval=config.get("refresh_interval", 1),
             static_time_budget_s=static_budget,
             dwell_scale=config.get("dwell_scale", 100.0),
+            dwell_rounds_override=config.get("dwell_rounds_override"),
         )
         rows.append({
             "instance_id": f"{topology}-n{n}-d{degree}-r{run:03d}",

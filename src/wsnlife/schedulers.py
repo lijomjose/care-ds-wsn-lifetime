@@ -181,7 +181,7 @@ def _select(
             )
             for _ in range(random_starts)
         ]
-    elif algorithm in {"MS-RG-TM", "MS-RG-WT"}:
+    elif algorithm in {"MS-RG-TM", "MS-RG-WT", "MS-RG-WT-DW"}:
         candidates = (
             list(archived_candidates)
             if archived_candidates is not None
@@ -265,7 +265,10 @@ def _select(
                 algorithm, base_neighbourhood_energy, reserve_targets,
             ),
         )[0]
-    if algorithm in {"MS-RG", "MS-RG-TM", "MS-RG-WT", "DWG-TM", "D-EAA-TM"}:
+    if algorithm in {
+        "MS-RG", "MS-RG-TM", "MS-RG-WT", "MS-RG-WT-DW",
+        "DWG-TM", "D-EAA-TM",
+    }:
         return max(
             feasible,
             key=lambda item: (
@@ -492,6 +495,7 @@ def run_algorithm(
     refresh_interval=1,
     static_time_budget_s=0.25,
     dwell_scale=100.0,
+    dwell_rounds_override=None,
 ):
     start = time.perf_counter()
     energy = np.asarray(initial_energy, dtype=float).copy()
@@ -537,7 +541,7 @@ def run_algorithm(
     last_change_round = -10**9
     portfolio_algorithms = {
         "CARE-DS", "CARE-noreserve", "CARE-noswitch", "DWG-TM", "D-EAA-TM",
-        "MS-RG-TM", "MS-RG-WT", "D-EAA-ER",
+        "MS-RG-TM", "MS-RG-WT", "MS-RG-WT-DW", "D-EAA-ER",
     }
     for round_no in range(max_rounds):
         failures_now = failure_events.get(round_no, ())
@@ -551,7 +555,8 @@ def run_algorithm(
             cost_cache.clear()
         effective_refresh = (
             max(1, int(round(refresh_interval * 0.45)))
-            if algorithm == "MS-RG-WT" else max(1, refresh_interval)
+            if algorithm in {"MS-RG-WT", "MS-RG-WT-DW"}
+            else max(1, refresh_interval)
         )
         if algorithm in portfolio_algorithms and (
             archive is None or round_no % effective_refresh == 0
@@ -577,7 +582,7 @@ def run_algorithm(
         # may always leave early if the current set becomes infeasible.  This
         # rule is disabled in CARE-noswitch for a controlled ablation.
         if (
-            algorithm in {"CARE-DS", "CARE-noreserve"}
+            algorithm in {"CARE-DS", "CARE-noreserve", "MS-RG-WT-DW"}
             and previous is not None
             and switch_cost > 0
         ):
@@ -588,9 +593,13 @@ def run_algorithm(
                 reference_cost = max(
                     params.packet_bits * params.electronics_j_per_bit, 1e-12
                 )
-            dwell_rounds = max(
-                1,
-                int(math.ceil(float(dwell_scale) * switch_cost / reference_cost)),
+            dwell_rounds = (
+                max(1, int(dwell_rounds_override))
+                if dwell_rounds_override is not None
+                else max(
+                    1,
+                    int(math.ceil(float(dwell_scale) * switch_cost / reference_cost)),
+                )
             )
             if round_no - last_change_round < dwell_rounds:
                 routing_vertices = {
@@ -645,7 +654,7 @@ def run_algorithm(
             break
         routing_vertices = {
             v for v in alive if energy[v] > 1e-12
-        } | set(selected) | ({sink} if mode == "connected" else set())
+        } | ({sink} if mode == "connected" else set())
         cost = _cached_round_cost(
             selected, previous, adjacency, positions, active_cost, switch_cost, sink, mode,
             energy_model, radio_parameters, cost_cache,

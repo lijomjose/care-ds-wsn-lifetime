@@ -177,3 +177,40 @@ def test_radio_candidate_score_includes_relays_and_route_entries():
         variant="CARE-noreserve",
     )
     assert score == (0.5, -0.25, -3)
+
+
+def test_dwell_matched_control_changes_only_the_dwell_rule():
+    graph = generate_instance(36, 12, 20260831, "er", 0.05, 0.20)
+    for switch_cost, dwell_scale in ((0.0, 100.0), (1e-4, 0.0)):
+        common = dict(
+            mode="dominating", active_cost=0.0, switch_cost=switch_cost,
+            random_starts=4, seed=31, max_rounds=200,
+            positions=graph.positions, energy_model="radio",
+            refresh_interval=20, dwell_scale=dwell_scale,
+        )
+        baseline = run_algorithm(
+            "MS-RG-WT", graph.adjacency, graph.energies, **common
+        )
+        matched = run_algorithm(
+            "MS-RG-WT-DW", graph.adjacency, graph.energies, **common
+        )
+        assert baseline.valid and matched.valid
+        assert matched.lifetime == baseline.lifetime
+        assert matched.switches == baseline.switches
+        assert matched.activations == baseline.activations
+
+    radio_common = dict(
+        mode="dominating", active_cost=0.0, switch_cost=1e-4,
+        random_starts=4, seed=31, max_rounds=200,
+        positions=graph.positions, energy_model="radio",
+        refresh_interval=20, dwell_scale=100.0,
+    )
+    historical = run_algorithm(
+        "MS-RG-WT-DW", graph.adjacency, graph.energies, **radio_common
+    )
+    pinned = run_algorithm(
+        "MS-RG-WT-DW", graph.adjacency, graph.energies,
+        dwell_rounds_override=51, **radio_common,
+    )
+    assert historical.lifetime == pinned.lifetime
+    assert historical.switches == pinned.switches

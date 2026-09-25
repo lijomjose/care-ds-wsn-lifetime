@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-fast integrity checks for every submission-scale result table."""
+"""Fail-fast integrity checks for every reported result table."""
 from __future__ import annotations
 
 import argparse
@@ -132,6 +132,10 @@ def main():
          preferred("failures_raw.csv", "failures_raw.csv")),
         ("ablation", ROOT / "configs/ablation_submission.json",
          preferred("ablation_submission_raw.csv", "ablation_submission_raw.csv")),
+        ("radio_dwell_control", ROOT / "configs/radio_dwell_control.json",
+         ROOT / "results/revision/radio_dwell_control_raw.csv"),
+        ("radio_ablation", ROOT / "configs/radio_ablation.json",
+         ROOT / "results/revision/radio_ablation_raw.csv"),
     ]
     reports = []
     for name, config_path, result_path in studies:
@@ -141,8 +145,8 @@ def main():
             continue
         reports.append(validate(name, config_path, result_path))
     reports.append(validate_lower_tail(
-        ROOT / "results/lower_tail_summary.csv",
-        ROOT / "results/lower_tail_deciles.csv",
+        ROOT / "results/revision/analysis/lower_tail_summary.csv",
+        ROOT / "results/revision/analysis/lower_tail_deciles.csv",
     ))
     output = ROOT / "results/submission_validation.json"
     output.write_text(json.dumps(reports, indent=2) + "\n")

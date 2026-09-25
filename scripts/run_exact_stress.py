@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prespecified n=21--22 exact stress suite using submission-scale heuristics."""
+"""Prespecified n=21--22 exact stress suite using the full-study heuristics."""
 from pathlib import Path
 import sys
 import time

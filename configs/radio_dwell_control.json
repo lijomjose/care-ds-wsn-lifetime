@@ -7,7 +7,7 @@
   "energy_low": 0.05,
   "energy_high": 0.20,
   "active_cost": 0.0,
-  "switch_costs": [0.0, 0.0001],
+  "switch_costs": [0.0001],
   "modes": ["dominating", "connected"],
   "failure_scenarios": ["none"],
   "energy_model": "radio",
@@ -21,14 +21,12 @@
   },
   "random_starts": 4,
   "refresh_interval": 100,
+  "dwell_scale": 100.0,
   "dwell_rounds_override": 51,
   "static_time_budget_s": 0.5,
   "static_time_budget_per_node_s": 0.0,
   "static_time_budget_cap_s": 0.5,
   "max_rounds": 5000,
   "workers": 8,
-  "algorithms": [
-    "EAA-static", "PBIG-R", "FSS-2026-R", "EAAS-S4C-MAB-R",
-    "D-EAA-ER", "DWG", "MS-RG-WT", "CARE-DS"
-  ]
+  "algorithms": ["MS-RG-WT-DW"]
 }

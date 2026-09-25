@@ -22,9 +22,9 @@ import pandas as pd
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_UNIT = ROOT / "results" / "submission_event_raw.csv"
-DEFAULT_RADIO = ROOT / "results" / "radio_raw.csv"
-DEFAULT_OUTPUT = ROOT / "results"
+DEFAULT_UNIT = ROOT / "results" / "corrected" / "merged" / "submission_event_raw.csv"
+DEFAULT_RADIO = ROOT / "results" / "revision" / "radio_with_dwell_control_raw.csv"
+DEFAULT_OUTPUT = ROOT / "results" / "revision" / "analysis"
 DEFAULT_FIGURES = ROOT / "paper" / "figures"
 
 
@@ -279,10 +279,10 @@ def main() -> None:
         ),
         Study(
             name="radio",
-            label="Radio, h/a_ref = 0.5",
+            label="Radio, h/a_ref = 0.5, dwell-matched control included",
             path=args.radio,
             switch_costs=(1e-4,),
-            competitors=None,
+            competitors=("D-EAA-ER", "DWG", "MS-RG-WT", "MS-RG-WT-DW"),
         ),
     ]
     studies = [(study, prepare(study)) for study in definitions]

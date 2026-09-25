@@ -1,65 +1,29 @@
 # CARE-DS: Dynamic Dominating-Set Scheduling for Heterogeneous WSNs
 
-This repository is the public reproducibility artifact for:
+This repository accompanies the manuscript **“CARE-DS: Critical-Neighborhood-Aware Residual-Energy Dominating-Set Scheduling for Heterogeneous Wireless Sensor Networks”** by Lijo M. Jose and Deepu Benson.
 
-> **CARE-DS: Critical-Neighborhood-Aware Residual-Energy Dominating-Set
-> Scheduling for Heterogeneous Wireless Sensor Networks**
-> 
-> Lijo M. Jose and Deepu Benson
+A fixed family of disjoint dominating sets can leave usable battery energy stranded when one member of a set runs out before the others. CARE-DS instead constructs feasible sets from the current network state. It uses the remaining energy in critical closed neighborhoods to choose a set and a dwell rule to avoid repeated handover costs.
 
-CARE-DS schedules a new dominating set—or a sink-rooted connected dominating
-set—when residual energy, handover cost, or node failures make a fixed disjoint
-family wasteful. The implementation evaluates CARE-DS against dynamic greedy,
-time-matched randomized, classical static, and modern paper-based baseline
-reproductions.
+## What the evidence says
 
-## Scope of the result
+CARE-DS is most useful in the tested unit-cost settings with nonzero handover energy and when failures require reconstruction. It does not lead when switching is free. In the first-order radio study, it exceeds a direct dwell-matched shared-portfolio control by 4.85% in ordinary service and 0.88% in connected service, but it falls below a retrospective per-instance oracle that may select among four controls overall. The 14.44% ordinary-service gain in the reselected lowest-lifetime decile is exploratory, with a stratified-bootstrap 95% interval of 6.04%–19.25%; the connected-tail interval includes zero. These simulations are not packet-level or testbed evidence.
 
-The evidence supports a conditional conclusion, not universal dominance:
+Comparators suffixed `-R` are documented reproductions or reconstructions, not executables supplied by their authors.
 
-- CARE-DS is **not** the best method when handovers are free.
-- Its advantage appears when reconfiguration consumes energy, especially at
-  handover costs 0.25 and 0.5, and when failures require reconstruction.
-- The first-order radio study is an energy-model simulation, not a packet-level
-  or hardware experiment.
-- The lower-tail analysis is explicitly exploratory and post hoc.
-- Baselines ending in `-R` are documented paper-based reproductions or
-  reconstructions, not the original authors' executable code.
+## Contents
 
-## What is included
+- `src/wsnlife/`: graphs, energy models, schedulers, baseline methods, and exact routines.
+- `configs/`: fixed study settings and deterministic seeds, including `radio_dwell_control.json` and `radio_ablation.json`.
+- `results/`: raw matrices and derived summaries. The corrected final primary matrices are under `results/corrected/merged/`; the audit-motivated radio additions are under `results/revision/`.
+- `scripts/`: simulation, analysis, validation, and figure generation.
+- `tests/`: feasibility and energy-accounting regression checks.
+- `docs/`: protocol, baseline provenance, and AI-assistance disclosure.
 
-| Path           | Contents                                                                   |
-| -------------- | -------------------------------------------------------------------------- |
-| `src/wsnlife/` | Graph generation, energy models, schedulers, baselines, and exact routines |
-| `configs/`     | Fixed configurations and deterministic seeds for every reported study      |
-| `results/`     | Final validated raw matrices and derived statistical tables                |
-| `scripts/`     | Experiment, validation, analysis, and figure-generation entry points       |
-| `tests/`       | Feasibility, energy-accounting, failure, and exactness checks              |
-| `paper/`       | Pre-submission manuscript PDF and generated figures                        |
-| `docs/`        | Reproduction protocol, data dictionary, baseline audit, and disclosure     |
+The audit-motivated radio additions contain 900 dwell-control and 1,800 ablation rows, each covering 450 graphs in both service modes. `MS-RG-WT-DW` gives the weighted multi-start control CARE-DS's feasible-set dwell rule. The full revised radio tail uses D-EAA-ER, DWG, MS-RG-WT, and MS-RG-WT-DW as the comparator set. The dwell control and radio ablation are exploratory analyses.
 
-The public release intentionally excludes superseded runs, interrupted logs,
-reviewer-response notes, internal decision reports, legacy MATLAB experiments,
-local working archives, and copies of third-party papers.
+## Validate the released evidence
 
-## Evidence matrix
-
-| Study               | Instances | Rows   | Main purpose                                                                                             |
-| ------------------- | ---------:| ------:| -------------------------------------------------------------------------------------------------------- |
-| Primary dynamic     | 2,700     | 86,400 | Five topology families, 30 seeds, 50–500 nodes, three densities, four handover costs, two service models |
-| Weighted static     | 3,150     | 18,900 | Modern static baselines up to 1,000 nodes                                                                |
-| Unweighted static   | 1,890     | 9,450  | FSS-oriented validation under equal 0.5 s budgets                                                        |
-| First-order radio   | 450       | 9,000  | Transmission, reception, aggregation, and wake-up energy                                                 |
-| Controlled failures | 450       | 12,150 | No failure, random failure, and low-reserve-node failure                                                 |
-| Ablation            | 450       | 8,100  | Reserve and switch-awareness components                                                                  |
-| Exact challenge     | 12        | 48     | Fixed adversarial 22-node ordinary-domination cases                                                      |
-
-All principal raw matrices use paired deterministic instances. Every scheduled
-set is checked for domination and, in connected mode, sink-rooted connectivity.
-
-## Quick start
-
-Python 3.10 or newer is required.
+Python 3.10 or newer is required. From the repository root:
 
 ```bash
 python3 -m venv .venv
@@ -69,57 +33,24 @@ python3 scripts/self_check.py
 python3 scripts/validate_submission.py
 ```
 
-To run a small end-to-end experiment without overwriting the released data:
+The validator checks nine study entries, including the two new radio matrices and the reselected lower-tail summary. It verifies row counts, instance counts, duplicate keys, missing values, and schedule validity.
+
+To rebuild the audit-motivated analysis from the included raw matrices:
 
 ```bash
-python3 scripts/run_pilot.py \
-  --config configs/smoke.json \
-  --output /tmp/care_ds_smoke.csv \
-  --workers 2
-```
-
-To rebuild the released statistical summaries and figures from the included raw
-matrices:
-
-```bash
-python3 scripts/analyse_submission.py \
-  --unit results/submission_event_raw.csv \
-  --modern-static results/modern_static_raw.csv \
-  --modern-unweighted results/modern_unweighted_raw.csv \
-  --radio results/radio_raw.csv \
-  --failures results/failures_raw.csv \
-  --ablation results/ablation_submission_raw.csv \
-  --exact results/exact_challenge.csv
-
+python3 scripts/analyse_radio_controls.py
 python3 scripts/analyse_lower_tail.py
-MPLCONFIGDIR=/tmp/matplotlib-care python3 scripts/make_submission_figures.py
-python3 scripts/validate_submission.py
 ```
 
-Full simulation runs can take substantial CPU time. Output is instance-resumable:
-rerunning a command computes only missing instance identifiers unless
-`--no-resume` is supplied.
+To rerun those two experiments without overwriting the released results:
 
-## Reproducibility and interpretation
+```bash
+python3 scripts/run_pilot.py --config configs/radio_dwell_control.json --output /tmp/radio_dwell_control_raw.csv --workers 8
+python3 scripts/run_pilot.py --config configs/radio_ablation.json --output /tmp/radio_ablation_raw.csv --workers 8
+```
 
-Read [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) before rerunning the
-full matrix. It records the acceptance rules, the paired-inference protocol,
-and restrictions on claims. The baseline provenance and deliberate
-implementation limits are in
-[`docs/BASELINE_REPRODUCTIONS.md`](docs/BASELINE_REPRODUCTIONS.md).
+Full simulations may take substantial CPU time. Runs are deterministic at the instance level and support resumption. The paper's baseline limitations are documented in `docs/BASELINE_REPRODUCTIONS.md`; the authors' AI-use disclosure is in `docs/AI_ASSISTANCE_DISCLOSURE.md`.
 
-The authors conceived the problem, model, CARE-DS algorithm, comparator
-protocol, experimental design, interpretation, and conclusions. The complete
-AI-assistance disclosure is preserved in
-[`docs/AI_ASSISTANCE_DISCLOSURE.md`](docs/AI_ASSISTANCE_DISCLOSURE.md).
+## Citation and license
 
-## Citation
-
-Until a DOI is assigned, cite this repository using [`CITATION.cff`](CITATION.cff)
-and identify the release version or commit hash used.
-
-## License
-
-Software in `src/`, `scripts/`, and `tests/` is released under the MIT License.
-The manuscript, figures, and result tables remain subject to the authors' and
-publisher's scholarly-use terms; see [`NOTICE.md`](NOTICE.md).
+Until a DOI is assigned, use `CITATION.cff` and identify the release commit. Software in `src/`, `scripts/`, and `tests/` is MIT-licensed. See `NOTICE.md` for manuscript, figure, and results terms.

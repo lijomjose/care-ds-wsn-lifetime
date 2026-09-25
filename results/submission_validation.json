@@ -1,7 +1,7 @@
 [
   {
     "study": "unit",
-    "result": "results/submission_event_raw.csv",
+    "result": "results/corrected/merged/submission_event_raw.csv",
     "rows": 86400,
     "expected_rows": 86400,
     "instances": 2700,
@@ -37,7 +37,7 @@
   },
   {
     "study": "radio",
-    "result": "results/radio_raw.csv",
+    "result": "results/corrected/merged/radio_raw.csv",
     "rows": 9000,
     "expected_rows": 9000,
     "instances": 450,
@@ -49,7 +49,7 @@
   },
   {
     "study": "failures",
-    "result": "results/failures_raw.csv",
+    "result": "results/corrected/merged/failures_raw.csv",
     "rows": 12150,
     "expected_rows": 12150,
     "instances": 450,
@@ -61,7 +61,7 @@
   },
   {
     "study": "ablation",
-    "result": "results/ablation_submission_raw.csv",
+    "result": "results/corrected/merged/ablation_submission_raw.csv",
     "rows": 8100,
     "expected_rows": 8100,
     "instances": 450,
@@ -72,8 +72,32 @@
     "passed": true
   },
   {
+    "study": "radio_dwell_control",
+    "result": "results/revision/radio_dwell_control_raw.csv",
+    "rows": 900,
+    "expected_rows": 900,
+    "instances": 450,
+    "expected_instances": 450,
+    "duplicate_rows": 0,
+    "invalid_rows": 0,
+    "missing_values": 0,
+    "passed": true
+  },
+  {
+    "study": "radio_ablation",
+    "result": "results/revision/radio_ablation_raw.csv",
+    "rows": 1800,
+    "expected_rows": 1800,
+    "instances": 450,
+    "expected_instances": 450,
+    "duplicate_rows": 0,
+    "invalid_rows": 0,
+    "missing_values": 0,
+    "passed": true
+  },
+  {
     "study": "lower_tail_analysis",
-    "result": "results/lower_tail_summary.csv; results/lower_tail_deciles.csv",
+    "result": "results/revision/analysis/lower_tail_summary.csv; results/revision/analysis/lower_tail_deciles.csv",
     "summary_rows": 12,
     "decile_rows": 40,
     "duplicate_summary_rows": 0,
