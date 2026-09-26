@@ -42,6 +42,27 @@ python3 scripts/analyse_radio_controls.py
 python3 scripts/analyse_lower_tail.py
 ```
 
+To rebuild the primary comparisons and manuscript figures from the corrected
+matrices, run:
+
+```bash
+python3 scripts/analyse_submission.py \
+  --unit results/corrected/merged/submission_event_raw.csv \
+  --modern-static results/modern_static_raw.csv \
+  --modern-unweighted results/modern_unweighted_raw.csv \
+  --radio results/corrected/merged/radio_raw.csv \
+  --failures results/corrected/merged/failures_raw.csv \
+  --ablation results/corrected/merged/ablation_submission_raw.csv \
+  --exact results/exact_challenge.csv \
+  --output-dir results/corrected/analysis
+MPLCONFIGDIR=/tmp/matplotlib-care python3 scripts/make_submission_figures.py
+```
+
+The older root-level primary matrices are retained for provenance. The paper
+uses the corrected matrices. Sensitivity and repeated-seed matrices, complete
+derived tables, and the final manuscript source are in the separate
+supplementary research artifact.
+
 To rerun those two experiments without overwriting the released results:
 
 ```bash

@@ -110,7 +110,12 @@ def supplementary_figures(radio_path, failures_path, exact_path):
             ax.set_title(mode.capitalize())
             ax.set_xlabel("Wake-up energy (J)")
         axes[0].set_ylabel("Mean radio-model lifetime")
-        axes[1].legend(frameon=False, fontsize=8)
+        legend_items = {}
+        for ax in axes:
+            handles, labels = ax.get_legend_handles_labels()
+            legend_items.update(zip(labels, handles))
+        fig.legend(legend_items.values(), legend_items.keys(), loc="lower center",
+                   bbox_to_anchor=(0.5, -0.10), frameon=False, fontsize=7, ncol=5)
         save(fig, "submission_radio")
 
     if failures_path.exists():

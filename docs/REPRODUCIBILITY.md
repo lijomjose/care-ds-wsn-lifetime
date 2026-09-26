@@ -19,12 +19,12 @@
 
 | Study | Configuration | Result | Acceptance rule |
 |---|---|---|---|
-| Primary dynamic | `configs/submission_event.json` | `results/submission_event_raw.csv` | 2,700 instances; 86,400 rows |
+| Primary dynamic | `configs/submission_event.json` | `results/corrected/merged/submission_event_raw.csv` | 2,700 instances; 86,400 rows |
 | Weighted static | `configs/modern_static.json` | `results/modern_static_raw.csv` | 3,150 instances; 18,900 rows |
 | Unweighted static | `configs/modern_unweighted.json` | `results/modern_unweighted_raw.csv` | 1,890 instances; 9,450 rows |
-| Radio | `configs/radio.json` | `results/radio_raw.csv` | 450 instances; 9,000 rows |
-| Failures | `configs/failures.json` | `results/failures_raw.csv` | 450 instances; 12,150 rows |
-| Ablation | `configs/ablation_submission.json` | `results/ablation_submission_raw.csv` | 450 instances; 8,100 rows |
+| Radio | `configs/radio.json` | `results/corrected/merged/radio_raw.csv` | 450 instances; 9,000 rows |
+| Failures | `configs/failures.json` | `results/corrected/merged/failures_raw.csv` | 450 instances; 12,150 rows |
+| Ablation | `configs/ablation_submission.json` | `results/corrected/merged/ablation_submission_raw.csv` | 450 instances; 8,100 rows |
 | Exact challenge | fixed in script | `results/exact_challenge.csv` | 12 instances; 48 rows |
 
 For each principal matrix, validation additionally requires zero duplicate
@@ -38,14 +38,15 @@ The released validation report is `results/submission_validation.json`.
 
 ## Full rerun
 
-Use `scripts/run_pilot.py` with each configuration and the output filename in
-the table. Runs are resumable at the instance level. The number of workers may
+Use `scripts/run_pilot.py` with each configuration and a separate output
+filename for a fresh run; do not overwrite the released corrected matrices.
+Runs are resumable at the instance level. The number of workers may
 be changed without changing deterministic instance seeds.
 
 After generation, run `scripts/validate_submission.py`, then
-`scripts/analyse_submission.py` with the paths shown in the root README. The
+`scripts/analyse_submission.py` with the corrected input paths shown in the root README. The
 analysis writes paired tests, summaries, runtime-fairness results, and evidence
-metadata to `results/`. `scripts/make_submission_figures.py` rebuilds the paper
+metadata to `results/corrected/analysis/`. `scripts/make_submission_figures.py` rebuilds the paper
 figures from those matrices.
 
 ## Claim restrictions
